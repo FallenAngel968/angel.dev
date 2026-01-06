@@ -710,20 +710,52 @@ const ProjectsPage = ({ theme }) => {
   const projects = [
     {
       title: 'CrypticOnline',
-      desc: 'E-commerce con backend profesional',
-      tech: ['Node.js', 'Express', 'PostgreSQL', 'React Native'],
+      desc: 'E-commerce multiplataforma con backend profesional y sincronización en tiempo real',
+      fullDesc: 'Plataforma de e-commerce completa desarrollada con arquitectura escalable. Implementé un backend robusto con Express.js que maneja miles de solicitudes concurrentes, autenticación JWT con refresh tokens, y un sistema de carrito persistente. La base de datos PostgreSQL gestiona transacciones ACID para garantizar integridad de datos en compras. El frontend en React Native proporciona una experiencia nativa en iOS y Android con sincronización automática de inventario.',
+      features: [
+        'API RESTful con validación exhaustiva de datos',
+        'Autenticación segura con JWT y refresh tokens',
+        'Sistema de carrito persistente con sincronización',
+        'Procesamiento de pagos integrado',
+        'Dashboard de administración con reportes',
+        'Caching con Redis para optimizar rendimiento'
+      ],
+      challenges: 'Manejo de concurrencia en operaciones de inventario y garantizar consistencia de datos en transacciones simultáneas',
+      tech: ['Node.js', 'Express', 'PostgreSQL', 'React Native', 'JWT', 'Redis'],
       color: 'cyan',
     },
     {
       title: 'Sistema de Torneos',
-      desc: 'App de competencias sin conexión',
-      tech: ['Node.js', 'WebSockets', 'SQLite'],
+      desc: 'App de gestión de competencias con funcionamiento offline y sincronización automática',
+      fullDesc: 'Aplicación móvil para gestionar torneos deportivos con arquitectura offline-first. Utiliza SQLite para almacenamiento local permitiendo funcionamiento sin conexión a internet. WebSockets mantienen los datos sincronizados en tiempo real entre múltiples dispositivos conectados. Implementé lógica de emparejamiento de participantes con algoritmos de balanceo y generación automática de brackets.',
+      features: [
+        'Funcionamiento sin conexión (offline-first)',
+        'Sincronización en tiempo real con WebSockets',
+        'Algoritmos de generación de brackets dinámicos',
+        'Sistema de puntuación y rankings en vivo',
+        'Notificaciones push para cambios importantes',
+        'Exportación de resultados en múltiples formatos'
+      ],
+      challenges: 'Resolver conflictos de datos cuando múltiples usuarios editan el torneo simultáneamente sin conexión',
+      tech: ['Node.js', 'WebSockets', 'SQLite', 'Express', 'React', 'PWA'],
       color: 'purple',
     },
     {
       title: 'Proyectos Académicos',
-      desc: 'APIs, CRUDs y autenticación',
-      tech: ['Express', 'JWT', 'Prisma ORM'],
+      desc: 'Suite de APIs RESTful con autenticación, bases de datos relacionales y patrones de diseño avanzados',
+      fullDesc: 'Colección de proyectos académicos que demuestran dominio de principios fundamentales de backend. Implementé múltiples APIs RESTful siguiendo estándares de la industria, autenticación con JWT, y uso de ORMs modernos. Cada proyecto incluye manejo de errores robusto, validación de datos, control de acceso basado en roles (RBAC), y pruebas unitarias.',
+      features: [
+        'APIs RESTful con controladores y servicios bien estructurados',
+        'Autenticación JWT con gestión de sesiones',
+        'ORM Prisma para queries type-safe',
+        'Validación de datos con Zod o Joi',
+        'Control de acceso basado en roles (RBAC)',
+        'Documentación automática con Swagger/OpenAPI',
+        'Pruebas unitarias con Jest',
+        'Manejo de errores con códigos HTTP estándar'
+      ],
+      challenges: 'Mantener código limpio, escalable y bien documentado en múltiples proyectos con diferentes requisitos',
+      tech: ['Express', 'JWT', 'Prisma ORM', 'PostgreSQL', 'Jest', 'Swagger', 'Zod'],
       color: 'pink',
     },
   ];
@@ -751,9 +783,9 @@ const ProjectsPage = ({ theme }) => {
           Proyectos Destacados
         </motion.h2>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-2 gap-8">
           {projects.map((project, idx) => (
-            <GlassCard key={idx} theme={theme} delay={idx * 0.1} className="p-8 group cursor-pointer">
+            <GlassCard key={idx} theme={theme} delay={idx * 0.1} className="p-8 group cursor-pointer h-full flex flex-col">
               <div className={`w-16 h-16 rounded-2xl mb-6 flex items-center justify-center backdrop-blur-xl border-2 transition-all duration-300 ${
                 theme === 'dark'
                   ? project.color === 'cyan'
@@ -769,24 +801,76 @@ const ProjectsPage = ({ theme }) => {
               }`}>
                 <RocketIcon />
               </div>
-              <h3 className={`text-2xl font-bold mb-3 ${
+
+              <h3 className={`text-2xl font-bold mb-2 ${
                 theme === 'dark' ? 'text-white' : 'text-gray-900'
               }`}>
                 {project.title}
               </h3>
-              <p className={`mb-6 ${
-                theme === 'dark' ? 'text-gray-400' : 'text-gray-600'
+
+              <p className={`mb-4 font-semibold ${
+                theme === 'dark' ? 'text-cyan-400' : 'text-purple-600'
               }`}>
                 {project.desc}
               </p>
-              <div className="flex flex-wrap gap-2">
+
+              <p className={`mb-6 leading-relaxed ${
+                theme === 'dark' ? 'text-gray-300' : 'text-gray-700'
+              }`}>
+                {project.fullDesc}
+              </p>
+
+              <div className="mb-6">
+                <p className={`text-sm font-bold mb-3 ${
+                  theme === 'dark' ? 'text-gray-400' : 'text-gray-600'
+                }`}>
+                  ✨ Funcionalidades Clave:
+                </p>
+                <ul className={`space-y-2 text-sm ${
+                  theme === 'dark' ? 'text-gray-300' : 'text-gray-700'
+                }`}>
+                  {project.features.map((feature, i) => (
+                    <li key={i} className="flex items-start gap-2">
+                      <span className={`mt-1 ${
+                        theme === 'dark' ? 'text-cyan-400' : 'text-purple-600'
+                      }`}>▸</span>
+                      <span>{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div className="mb-6 pb-6 border-t" style={{
+                borderColor: theme === 'dark' ? 'rgba(148, 163, 184, 0.2)' : 'rgba(168, 85, 247, 0.2)'
+              }}>
+                <p className={`text-sm font-bold mt-4 mb-2 ${
+                  theme === 'dark' ? 'text-gray-400' : 'text-gray-600'
+                }`}>
+                  🎯 Desafío Principal:
+                </p>
+                <p className={`text-sm ${
+                  theme === 'dark' ? 'text-gray-300' : 'text-gray-700'
+                }`}>
+                  {project.challenges}
+                </p>
+              </div>
+
+              <div className="flex flex-wrap gap-2 mt-auto">
                 {project.tech.map((tech) => (
                   <span
                     key={tech}
-                    className={`px-3 py-1 rounded-lg text-sm font-medium backdrop-blur-xl border ${
+                    className={`px-3 py-1.5 rounded-lg text-xs font-semibold backdrop-blur-xl border transition-all duration-200 ${
                       theme === 'dark'
-                        ? 'bg-cyan-500/10 border-cyan-400/30 text-cyan-400'
-                        : 'bg-purple-500/10 border-purple-500/30 text-purple-600'
+                        ? `${
+                            project.color === 'cyan' ? 'bg-cyan-500/20 border-cyan-400/40 text-cyan-300' :
+                            project.color === 'purple' ? 'bg-purple-500/20 border-purple-400/40 text-purple-300' :
+                            'bg-pink-500/20 border-pink-400/40 text-pink-300'
+                          }`
+                        : `${
+                            project.color === 'cyan' ? 'bg-cyan-500/20 border-cyan-500/40 text-cyan-700' :
+                            project.color === 'purple' ? 'bg-purple-500/20 border-purple-500/40 text-purple-700' :
+                            'bg-pink-500/20 border-pink-500/40 text-pink-700'
+                          }`
                     }`}
                   >
                     {tech}
