@@ -56,44 +56,6 @@ const MailIcon = () => (
 );
 
 // Theme Switcher Button
-const ThemeToggle = ({ theme, toggleTheme }) => (
-  <motion.button
-    onClick={toggleTheme}
-    className={`fixed top-6 right-6 z-50 p-3 rounded-full backdrop-blur-xl border-2 transition-all duration-300 ${
-      theme === 'dark'
-        ? 'bg-black/60 border-cyan-400/50 text-cyan-400 hover:border-cyan-400 hover:shadow-[0_0_20px_rgba(34,211,238,0.5)]'
-        : 'bg-white/90 border-purple-500/50 text-purple-600 hover:border-purple-600 hover:shadow-[0_0_20px_rgba(168,85,247,0.5)]'
-    }`}
-    whileHover={{ scale: 1.1, rotate: 180 }}
-    whileTap={{ scale: 0.95 }}
-    transition={{ type: 'spring', stiffness: 400 }}
-  >
-    <AnimatePresence mode="wait">
-      {theme === 'dark' ? (
-        <motion.div
-          key="sun"
-          initial={{ rotate: -180, opacity: 0 }}
-          animate={{ rotate: 0, opacity: 1 }}
-          exit={{ rotate: 180, opacity: 0 }}
-          transition={{ duration: 0.3 }}
-        >
-          <SunIcon />
-        </motion.div>
-      ) : (
-        <motion.div
-          key="moon"
-          initial={{ rotate: 180, opacity: 0 }}
-          animate={{ rotate: 0, opacity: 1 }}
-          exit={{ rotate: -180, opacity: 0 }}
-          transition={{ duration: 0.3 }}
-        >
-          <MoonIcon />
-        </motion.div>
-      )}
-    </AnimatePresence>
-  </motion.button>
-);
-
 // Animated Background
 const AnimatedBackground = ({ theme }) => (
   <div className="fixed inset-0 -z-10 overflow-hidden">
@@ -188,7 +150,9 @@ const AnimatedBackground = ({ theme }) => (
 );
 
 // Navigation
-const Navigation = ({ currentPage, setCurrentPage, theme }) => {
+const Navigation = ({ currentPage, setCurrentPage, theme, toggleTheme }) => {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
   const pages = [
     { id: 'home', label: 'Inicio', icon: RocketIcon },
     { id: 'about', label: 'Sobre mí', icon: UserIcon },
@@ -201,7 +165,7 @@ const Navigation = ({ currentPage, setCurrentPage, theme }) => {
     <motion.nav
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      className={`fixed top-0 left-0 right-0 z-40 backdrop-blur-2xl border-b-2 transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-50 backdrop-blur-2xl border-b-2 transition-all duration-300 ${
         theme === 'dark'
           ? 'bg-black/60 border-cyan-400/20'
           : 'bg-white/80 border-purple-500/30'
@@ -219,7 +183,8 @@ const Navigation = ({ currentPage, setCurrentPage, theme }) => {
             <span className="text-pink-500">.dev</span>
           </motion.div>
 
-          <div className="hidden md:flex gap-3">
+          {/* Desktop Menu */}
+          <div className="hidden md:flex gap-3 items-center">
             {pages.map((page) => (
               <motion.button
                 key={page.id}
@@ -240,31 +205,155 @@ const Navigation = ({ currentPage, setCurrentPage, theme }) => {
                 <span>{page.label}</span>
               </motion.button>
             ))}
+
+            {/* Theme Toggle Desktop */}
+            <motion.button
+              onClick={toggleTheme}
+              className={`ml-2 p-3 rounded-lg backdrop-blur-xl border-2 transition-all duration-300 ${
+                theme === 'dark'
+                  ? 'bg-black/60 border-cyan-400/50 text-cyan-400 hover:border-cyan-400 hover:shadow-[0_0_20px_rgba(34,211,238,0.5)]'
+                  : 'bg-white/90 border-purple-500/50 text-purple-600 hover:border-purple-600 hover:shadow-[0_0_20px_rgba(168,85,247,0.5)]'
+              }`}
+              whileHover={{ scale: 1.1, rotate: 180 }}
+              whileTap={{ scale: 0.95 }}
+              transition={{ type: 'spring', stiffness: 400 }}
+            >
+              <AnimatePresence mode="wait">
+                {theme === 'dark' ? (
+                  <motion.div
+                    key="sun"
+                    initial={{ rotate: -180, opacity: 0 }}
+                    animate={{ rotate: 0, opacity: 1 }}
+                    exit={{ rotate: 180, opacity: 0 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <SunIcon />
+                  </motion.div>
+                ) : (
+                  <motion.div
+                    key="moon"
+                    initial={{ rotate: 180, opacity: 0 }}
+                    animate={{ rotate: 0, opacity: 1 }}
+                    exit={{ rotate: -180, opacity: 0 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <MoonIcon />
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </motion.button>
           </div>
 
-          {/* Mobile Menu */}
-          <div className="md:hidden flex gap-2">
-            {pages.map((page) => (
-              <motion.button
-                key={page.id}
-                onClick={() => setCurrentPage(page.id)}
-                className={`p-2.5 rounded-lg backdrop-blur-xl border-2 transition-all ${
-                  currentPage === page.id
-                    ? theme === 'dark'
-                      ? 'bg-cyan-500/20 border-cyan-400/60 text-cyan-400 shadow-[0_0_15px_rgba(34,211,238,0.4)]'
-                      : 'bg-purple-500/20 border-purple-500/60 text-purple-600 shadow-[0_0_15px_rgba(168,85,247,0.3)]'
-                    : theme === 'dark'
-                    ? 'text-gray-400 border-gray-700/30 hover:border-cyan-400/40 hover:text-cyan-400'
-                    : 'text-gray-600 border-purple-500/20 hover:border-purple-500/50 hover:text-purple-600'
-                }`}
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
+          {/* Mobile: Hamburger Menu Button and Theme Toggle */}
+          <div className="md:hidden flex gap-2 items-center">
+            <motion.button
+              onClick={toggleTheme}
+              className={`p-2.5 rounded-lg backdrop-blur-xl border-2 transition-all duration-300 ${
+                theme === 'dark'
+                  ? 'bg-black/60 border-cyan-400/50 text-cyan-400 hover:border-cyan-400 hover:shadow-[0_0_20px_rgba(34,211,238,0.5)]'
+                  : 'bg-white/90 border-purple-500/50 text-purple-600 hover:border-purple-600 hover:shadow-[0_0_20px_rgba(168,85,247,0.5)]'
+              }`}
+              whileHover={{ scale: 1.1, rotate: 180 }}
+              whileTap={{ scale: 0.95 }}
+              transition={{ type: 'spring', stiffness: 400 }}
+            >
+              <AnimatePresence mode="wait">
+                {theme === 'dark' ? (
+                  <motion.div
+                    key="sun"
+                    initial={{ rotate: -180, opacity: 0 }}
+                    animate={{ rotate: 0, opacity: 1 }}
+                    exit={{ rotate: 180, opacity: 0 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <SunIcon />
+                  </motion.div>
+                ) : (
+                  <motion.div
+                    key="moon"
+                    initial={{ rotate: 180, opacity: 0 }}
+                    animate={{ rotate: 0, opacity: 1 }}
+                    exit={{ rotate: -180, opacity: 0 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <MoonIcon />
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </motion.button>
+
+            <motion.button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className={`p-2.5 rounded-lg backdrop-blur-xl border-2 transition-all ${
+                theme === 'dark'
+                  ? 'border-gray-700/50 text-cyan-400 hover:border-cyan-400/60 hover:bg-cyan-500/10'
+                  : 'border-purple-500/30 text-purple-600 hover:border-purple-500/60 hover:bg-purple-500/10'
+              }`}
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+            >
+              <svg
+                className="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
               >
-                <page.icon />
-              </motion.button>
-            ))}
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
+              </svg>
+            </motion.button>
           </div>
         </div>
+
+        {/* Mobile Menu Dropdown */}
+        <AnimatePresence>
+          {mobileMenuOpen && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.3 }}
+              className={`md:hidden overflow-hidden border-t-2 ${
+                theme === 'dark'
+                  ? 'border-cyan-400/10 bg-black/50'
+                  : 'border-purple-500/20 bg-white/50'
+              }`}
+            >
+              <div className="px-4 py-4 space-y-2">
+                {pages.map((page, idx) => (
+                  <motion.button
+                    key={page.id}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: idx * 0.05 }}
+                    onClick={() => {
+                      setCurrentPage(page.id);
+                      setMobileMenuOpen(false);
+                    }}
+                    className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl font-semibold transition-all duration-300 backdrop-blur-xl border-2 ${
+                      currentPage === page.id
+                        ? theme === 'dark'
+                          ? 'bg-cyan-500/20 text-cyan-400 border-cyan-400/60 shadow-[0_0_20px_rgba(34,211,238,0.3)]'
+                          : 'bg-purple-500/20 text-purple-600 border-purple-500/60 shadow-[0_0_15px_rgba(168,85,247,0.3)]'
+                        : theme === 'dark'
+                        ? 'text-gray-300 border-gray-700/30 hover:border-cyan-400/40 hover:text-cyan-400 hover:bg-cyan-500/10'
+                        : 'text-gray-600 border-purple-500/20 hover:border-purple-500/40 hover:text-purple-600 hover:bg-purple-500/10'
+                    }`}
+                    whileHover={{ x: 8 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <page.icon />
+                    <span>{page.label}</span>
+                  </motion.button>
+                ))}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </motion.nav>
   );
@@ -295,14 +384,14 @@ const HomePage = ({ theme, setCurrentPage }) => (
     exit={{ opacity: 0 }}
     className="min-h-screen flex items-center justify-center px-4 pt-20"
   >
-    <div className="max-w-4xl mx-auto text-center">
+    <div className="max-w-4xl mx-auto text-center w-full">
       <motion.div
         initial={{ scale: 0 }}
         animate={{ scale: 1 }}
         transition={{ type: 'spring', stiffness: 200 }}
-        className="mb-8"
+        className="mb-6 sm:mb-8"
       >
-        <div className={`inline-block p-4 rounded-full backdrop-blur-xl border-2 ${
+        <div className={`inline-block p-3 sm:p-4 rounded-full backdrop-blur-xl border-2 ${
           theme === 'dark'
             ? 'bg-cyan-500/10 border-cyan-400/50 shadow-[0_0_30px_rgba(34,211,238,0.4)] text-cyan-400'
             : 'bg-purple-500/10 border-purple-500/50 shadow-[0_0_30px_rgba(168,85,247,0.4)] text-purple-600'
@@ -315,7 +404,7 @@ const HomePage = ({ theme, setCurrentPage }) => (
         initial={{ y: 50, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ delay: 0.2 }}
-        className={`text-6xl md:text-8xl font-black mb-6 ${
+        className={`text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-black mb-4 sm:mb-6 leading-tight ${
           theme === 'dark'
             ? 'text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500'
             : 'text-transparent bg-clip-text bg-gradient-to-r from-purple-600 via-pink-500 to-orange-500'
@@ -331,7 +420,7 @@ const HomePage = ({ theme, setCurrentPage }) => (
         initial={{ y: 50, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ delay: 0.4 }}
-        className={`text-xl md:text-2xl mb-12 ${
+        className={`text-base sm:text-lg md:text-xl lg:text-2xl mb-8 sm:mb-12 px-2 ${
           theme === 'dark' ? 'text-gray-300' : 'text-gray-700'
         }`}
       >
@@ -342,14 +431,14 @@ const HomePage = ({ theme, setCurrentPage }) => (
         initial={{ y: 50, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ delay: 0.6 }}
-        className="flex gap-4 justify-center flex-wrap"
+        className="flex gap-3 sm:gap-4 justify-center flex-wrap mb-12 sm:mb-20 px-2"
       >
         <motion.button
           onClick={() => {
             setCurrentPage('projects');
             window.scrollTo({ top: 0, behavior: 'smooth' });
           }}
-          className={`px-8 py-4 rounded-xl font-bold text-white transition-all duration-300 backdrop-blur-xl border border-white/20 group cursor-pointer ${
+          className={`px-4 sm:px-8 py-2.5 sm:py-4 rounded-lg sm:rounded-xl font-semibold sm:font-bold text-sm sm:text-base text-white transition-all duration-300 backdrop-blur-xl border border-white/20 group cursor-pointer ${
             theme === 'dark'
               ? 'bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-400 hover:to-purple-500 shadow-[0_0_30px_rgba(34,211,238,0.5)] hover:shadow-[0_0_50px_rgba(34,211,238,0.7)]'
               : 'bg-gradient-to-r from-purple-600 to-pink-500 hover:from-purple-500 hover:to-pink-400 shadow-[0_0_30px_rgba(168,85,247,0.5)] hover:shadow-[0_0_50px_rgba(168,85,247,0.7)]'
@@ -360,7 +449,7 @@ const HomePage = ({ theme, setCurrentPage }) => (
         >
           <motion.span className="flex items-center gap-2" initial={{ x: 0 }} whileHover={{ x: 8 }} transition={{ type: 'spring', stiffness: 300 }}>
             <BriefcaseIcon />
-            Ver Proyectos
+            <span>Ver Proyectos</span>
           </motion.span>
         </motion.button>
         <motion.button
@@ -368,7 +457,7 @@ const HomePage = ({ theme, setCurrentPage }) => (
             setCurrentPage('contact');
             window.scrollTo({ top: 0, behavior: 'smooth' });
           }}
-          className={`px-8 py-4 rounded-xl font-bold backdrop-blur-xl border-2 transition-all duration-300 cursor-pointer ${
+          className={`px-4 sm:px-8 py-2.5 sm:py-4 rounded-lg sm:rounded-xl font-semibold sm:font-bold text-sm sm:text-base backdrop-blur-xl border-2 transition-all duration-300 cursor-pointer ${
             theme === 'dark'
               ? 'border-cyan-400/80 text-cyan-400 hover:bg-cyan-500/20 shadow-[0_0_20px_rgba(34,211,238,0.3)] hover:shadow-[0_0_40px_rgba(34,211,238,0.5)]'
               : 'border-purple-500/80 text-purple-600 hover:bg-purple-500/20 shadow-[0_0_20px_rgba(168,85,247,0.3)] hover:shadow-[0_0_40px_rgba(168,85,247,0.5)]'
@@ -379,7 +468,7 @@ const HomePage = ({ theme, setCurrentPage }) => (
         >
           <motion.span className="flex items-center gap-2" initial={{ x: 0 }} whileHover={{ x: 8 }} transition={{ type: 'spring', stiffness: 300 }}>
             <MailIcon />
-            Contactar
+            <span>Contactar</span>
           </motion.span>
         </motion.button>
       </motion.div>
@@ -389,22 +478,22 @@ const HomePage = ({ theme, setCurrentPage }) => (
         initial={{ y: 50, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ delay: 0.8 }}
-        className="mt-20 grid grid-cols-3 gap-4 max-w-2xl mx-auto"
+        className="mt-20 grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-2xl mx-auto px-4"
       >
         {[
           { label: 'Proyectos', value: '3+' },
           { label: 'Especialidad', value: 'Backend' },
           { label: 'Capacidad', value: 'Full-stack' },
         ].map((stat, idx) => (
-          <GlassCard key={idx} theme={theme} delay={1 + idx * 0.1} className="p-6">
-            <div className={`text-4xl font-black mb-2 ${
+          <GlassCard key={idx} theme={theme} delay={1 + idx * 0.1} className="p-4 sm:p-6">
+            <div className={`text-2xl sm:text-3xl md:text-4xl font-black mb-2 ${
               theme === 'dark'
                 ? 'text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-pink-500'
                 : 'text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-500'
             }`}>
               {stat.value}
             </div>
-            <div className={theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}>
+            <div className={`text-sm sm:text-base ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
               {stat.label}
             </div>
           </GlassCard>
@@ -1174,8 +1263,7 @@ export default function App() {
         }`}
       >
         <AnimatedBackground theme={theme} />
-        <Navigation currentPage={currentPage} setCurrentPage={setCurrentPage} theme={theme} />
-        <ThemeToggle theme={theme} toggleTheme={toggleTheme} />
+        <Navigation currentPage={currentPage} setCurrentPage={setCurrentPage} theme={theme} toggleTheme={toggleTheme} />
         
         <AnimatePresence mode="wait">
           <CurrentPageComponent key={currentPage} theme={theme} setCurrentPage={setCurrentPage} />
