@@ -288,7 +288,7 @@ const GlassCard = ({ children, theme, delay = 0, className = '' }) => (
 );
 
 // Home Page
-const HomePage = ({ theme }) => (
+const HomePage = ({ theme, setCurrentPage }) => (
   <motion.div
     initial={{ opacity: 0 }}
     animate={{ opacity: 1 }}
@@ -347,17 +347,18 @@ const HomePage = ({ theme }) => (
         <motion.button
           onClick={() => {
             setCurrentPage('projects');
-            setTimeout(() => window.scrollTo({ top: 0, behavior: 'smooth' }), 100);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
           }}
-          className={`px-8 py-4 rounded-xl font-bold text-white transition-all duration-300 backdrop-blur-xl border border-white/20 group ${
+          className={`px-8 py-4 rounded-xl font-bold text-white transition-all duration-300 backdrop-blur-xl border border-white/20 group cursor-pointer ${
             theme === 'dark'
               ? 'bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-400 hover:to-purple-500 shadow-[0_0_30px_rgba(34,211,238,0.5)] hover:shadow-[0_0_50px_rgba(34,211,238,0.7)]'
               : 'bg-gradient-to-r from-purple-600 to-pink-500 hover:from-purple-500 hover:to-pink-400 shadow-[0_0_30px_rgba(168,85,247,0.5)] hover:shadow-[0_0_50px_rgba(168,85,247,0.7)]'
           }`}
-          whileHover={{ scale: 1.08, y: -3 }}
+          whileHover={{ scale: 1.12, y: -5 }}
           whileTap={{ scale: 0.95 }}
+          transition={{ type: 'spring', stiffness: 300 }}
         >
-          <motion.span className="flex items-center gap-2" initial={{ x: 0 }} whileHover={{ x: 5 }}>
+          <motion.span className="flex items-center gap-2" initial={{ x: 0 }} whileHover={{ x: 8 }} transition={{ type: 'spring', stiffness: 300 }}>
             <BriefcaseIcon />
             Ver Proyectos
           </motion.span>
@@ -365,17 +366,18 @@ const HomePage = ({ theme }) => (
         <motion.button
           onClick={() => {
             setCurrentPage('contact');
-            setTimeout(() => window.scrollTo({ top: 0, behavior: 'smooth' }), 100);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
           }}
-          className={`px-8 py-4 rounded-xl font-bold backdrop-blur-xl border-2 transition-all duration-300 ${
+          className={`px-8 py-4 rounded-xl font-bold backdrop-blur-xl border-2 transition-all duration-300 cursor-pointer ${
             theme === 'dark'
               ? 'border-cyan-400/80 text-cyan-400 hover:bg-cyan-500/20 shadow-[0_0_20px_rgba(34,211,238,0.3)] hover:shadow-[0_0_40px_rgba(34,211,238,0.5)]'
               : 'border-purple-500/80 text-purple-600 hover:bg-purple-500/20 shadow-[0_0_20px_rgba(168,85,247,0.3)] hover:shadow-[0_0_40px_rgba(168,85,247,0.5)]'
           }`}
-          whileHover={{ scale: 1.08, y: -3 }}
+          whileHover={{ scale: 1.12, y: -5 }}
           whileTap={{ scale: 0.95 }}
+          transition={{ type: 'spring', stiffness: 300 }}
         >
-          <motion.span className="flex items-center gap-2" initial={{ x: 0 }} whileHover={{ x: 5 }}>
+          <motion.span className="flex items-center gap-2" initial={{ x: 0 }} whileHover={{ x: 8 }} transition={{ type: 'spring', stiffness: 300 }}>
             <MailIcon />
             Contactar
           </motion.span>
@@ -1092,7 +1094,7 @@ export default function App() {
         <ThemeToggle theme={theme} toggleTheme={toggleTheme} />
         
         <AnimatePresence mode="wait">
-          <CurrentPageComponent key={currentPage} theme={theme} />
+          <CurrentPageComponent key={currentPage} theme={theme} setCurrentPage={setCurrentPage} />
         </AnimatePresence>
       </div>
     </ThemeContext.Provider>
