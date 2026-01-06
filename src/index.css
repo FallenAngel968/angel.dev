@@ -9,7 +9,7 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #0f172a;
+  background-color: #0E0E10;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -25,9 +25,11 @@ html, body, #root {
 }
 
 body {
-  @apply bg-primary text-gray-100 font-sans;
   margin: 0;
   padding: 0;
+  background-color: #0E0E10;
+  color: #8E96A3;
+  font-family: system-ui, -apple-system, sans-serif;
   min-height: 100vh;
 }
 

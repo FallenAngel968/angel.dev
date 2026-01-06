@@ -17,12 +17,13 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: #0f172a;
-  color: #e2e8f0;
+  background: #0E0E10;
+  color: #8E96A3;
   margin: 0;
   padding: 0;
   width: 100%;
   overflow-x: hidden;
+  text-shadow: none;
 }
 
 #root {
@@ -43,13 +44,13 @@ code {
 }
 
 ::-webkit-scrollbar-track {
-  background: #0f172a;
+  background: #0E0E10;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #3b82f6;
+  background: #3B82F6;
   border-radius: 5px;
-  border: 2px solid #0f172a;
+  border: 2px solid #0E0E10;
 }
 
 ::-webkit-scrollbar-thumb:hover {

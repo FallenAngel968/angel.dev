@@ -25,7 +25,7 @@ export default function Contact() {
   ]
 
   return (
-    <section id="contact" className="py-24 px-4 w-full overflow-x-hidden bg-gradient-to-b from-primary to-primary/80">
+    <section id="contact" className="py-24 px-4 w-full overflow-x-hidden bg-primary">
       <div className="max-w-3xl mx-auto">
         <AnimatedSection>
           <div className="text-center mb-12">
@@ -35,7 +35,7 @@ export default function Contact() {
             <h2 className="text-5xl md:text-6xl font-black bg-gradient-to-r from-green-400 via-accent to-blue-400 bg-clip-text text-transparent mb-6 mt-4">
               ¿Hablamos?
             </h2>
-            <p className="text-gray-200 text-xl leading-relaxed max-w-2xl mx-auto">
+            <p className="text-textSecondary text-xl leading-relaxed max-w-2xl mx-auto">
               Estoy abierto a oportunidades, colaboraciones y conversaciones sobre arquitectura backend, 
               problemas técnicos interesantes o cualquier cosa relacionada con desarrollo serio.
             </p>
@@ -49,16 +49,16 @@ export default function Contact() {
                 href={option.url}
                 target={option.url.startsWith('mailto') ? undefined : "_blank"}
                 rel={option.url.startsWith('mailto') ? undefined : "noopener noreferrer"}
-                className="block bg-gradient-to-br from-gray-900 to-gray-900/50 border border-gray-700/50 rounded-lg p-6 hover:border-gray-600 transition-all duration-300 hover:shadow-lg hover:shadow-accent/10 group"
-                whileHover={{ x: 6, borderColor: '#3b82f6' }}
+                className="block bg-secondary/30 border border-secondary/50 rounded-lg p-6 hover:border-secondary/70 transition-all duration-300 hover:shadow-lg hover:shadow-accent/10 group"
+                whileHover={{ x: 6, borderColor: '#3B82F6' }}
               >
                 <div className="flex items-center gap-4">
-                  <option.icon className="w-8 h-8 text-accent flex-shrink-0 group-hover:scale-110 transition-transform" />
+                  <option.icon className="w-8 h-8 text-textSecondary group-hover:text-accent flex-shrink-0 group-hover:scale-110 transition-transform" />
                   <div className="flex-1 text-left">
-                    <h3 className="text-xl font-black text-gray-100 group-hover:text-accent transition-colors">
+                    <h3 className="text-xl font-black text-textPrimary group-hover:text-accent transition-colors">
                       {option.title}
                     </h3>
-                    <p className="text-gray-300 text-base">{option.description}</p>
+                    <p className="text-textTertiary text-base">{option.description}</p>
                   </div>
                   <span className="text-accent opacity-0 group-hover:opacity-100 transition-opacity text-xl">
                     →
@@ -70,11 +70,11 @@ export default function Contact() {
         </div>
 
         <AnimatedSection delay={0.4}>
-          <div className="mt-16 pt-8 border-t border-gray-800/50 text-center">
-            <p className="text-gray-400 text-base mb-3">
+          <div className="mt-16 pt-8 border-t border-secondary/30 text-center">
+            <p className="text-textSecondary text-base mb-3">
               Siempre interesado en:
             </p>
-            <p className="text-gray-300 text-lg leading-relaxed">
+            <p className="text-textPrimary text-lg leading-relaxed">
               Proyectos backend desafiantes • Equipo técnico serio • Problemas de escalabilidad • Arquitectura de sistemas
             </p>
           </div>

@@ -71,17 +71,17 @@ export default function Projects() {
   ]
 
   return (
-    <section id="projects" className="py-24 px-4 w-full overflow-x-hidden bg-gradient-to-b from-primary to-primary/80">
+    <section id="projects" className="py-24 px-4 w-full overflow-x-hidden bg-primary">
       <div className="max-w-5xl mx-auto">
         <AnimatedSection>
           <div className="text-center mb-16">
             <p className="text-accent text-sm font-mono tracking-widest uppercase mb-4 inline-block bg-accent/10 px-4 py-2 rounded-full">
               // Proyectos
             </p>
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-100 mb-6 mt-4">
+            <h2 className="text-4xl md:text-5xl font-bold text-textPrimary mb-6 mt-4">
               Productos técnicos reales
             </h2>
-            <p className="text-gray-200 max-w-2xl mx-auto text-lg">
+            <p className="text-textSecondary max-w-2xl mx-auto text-lg">
               Proyectos que resolvieron problemas específicos. Cada uno enseñó lecciones de arquitectura y escalabilidad.
             </p>
           </div>
@@ -91,15 +91,15 @@ export default function Projects() {
           {projects.map((project, idx) => (
             <AnimatedSection key={idx} delay={0.1 * idx}>
               <motion.div 
-                className="bg-gradient-to-br from-gray-900 to-gray-900/50 border border-gray-700/50 rounded-lg p-8 hover:border-gray-600/80 transition-all duration-300 hover:shadow-xl hover:shadow-accent/5 group"
+                className="bg-secondary/30 border border-secondary/50 rounded-lg p-8 hover:border-secondary/70 transition-all duration-300 hover:shadow-xl hover:shadow-accent/10 group"
                 whileHover={{ y: -4 }}
               >
                 <div className="flex flex-col md:flex-row justify-between items-start gap-4 mb-6">
                   <div className="flex-1">
-                    <h3 className="text-2xl md:text-3xl font-black text-gray-100 mb-2 group-hover:text-accent transition-colors">
+                    <h3 className="text-2xl md:text-3xl font-black text-textPrimary mb-2 group-hover:text-accent transition-colors">
                       {project.title}
                     </h3>
-                    <p className="text-gray-300 text-lg">{project.subtitle}</p>
+                    <p className="text-textSecondary text-lg">{project.subtitle}</p>
                   </div>
                   <span className="px-4 py-2 bg-accent/20 text-accent text-xs font-mono rounded-full border border-accent/40 whitespace-nowrap">
                     {project.status}
@@ -107,22 +107,22 @@ export default function Projects() {
                 </div>
                 
                 <div className="grid md:grid-cols-2 gap-8 mb-8">
-                  <div className="bg-gray-800/40 rounded p-5 border border-gray-700/30">
+                  <div className="bg-secondary/20 rounded p-5 border border-secondary/30">
                     <h4 className="text-accent font-mono text-xs uppercase tracking-widest mb-3 flex items-center gap-2">
                       <span className="w-1.5 h-1.5 bg-accent rounded-full"></span> Problema
                     </h4>
-                    <p className="text-gray-200 text-base leading-relaxed">
+                    <p className="text-textSecondary text-base leading-relaxed">
                       {project.problem}
                     </p>
                   </div>
                   
-                  <div className="bg-gray-800/40 rounded p-5 border border-gray-700/30">
+                  <div className="bg-secondary/20 rounded p-5 border border-secondary/30">
                     <h4 className="text-accent font-mono text-xs uppercase tracking-widest mb-3 flex items-center gap-2">
                       <span className="w-1.5 h-1.5 bg-accent rounded-full"></span> Solución
                     </h4>
                     <ul className="space-y-1.5">
                       {project.solution.map((item, i) => (
-                        <li key={i} className="text-gray-200 text-base flex gap-2">
+                        <li key={i} className="text-textSecondary text-base flex gap-2">
                           <span className="text-accent flex-shrink-0">›</span>
                           <span>{item}</span>
                         </li>
@@ -131,13 +131,13 @@ export default function Projects() {
                   </div>
                 </div>
 
-                <div className="bg-accent/5 rounded p-5 mb-6 border border-accent/20">
+                <div className="bg-secondary/15 rounded p-5 mb-6 border border-secondary/30">
                   <h4 className="text-accent font-mono text-xs uppercase tracking-widest mb-3 flex items-center gap-2">
                     <span className="w-1.5 h-1.5 bg-accent rounded-full"></span> Responsabilidad técnica
                   </h4>
                   <ul className="grid md:grid-cols-2 gap-2">
                     {project.responsibility.map((item, i) => (
-                      <li key={i} className="text-gray-200 text-base flex gap-2">
+                      <li key={i} className="text-textSecondary text-base flex gap-2">
                         <span className="text-accent">✓</span>
                         <span>{item}</span>
                       </li>

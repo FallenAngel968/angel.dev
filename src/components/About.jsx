@@ -3,7 +3,7 @@ import AnimatedSection from './AnimatedSection'
 
 export default function About() {
   return (
-    <section id="about" className="py-24 px-4 w-full overflow-x-hidden bg-gradient-to-b from-primary/80 to-primary">
+    <section id="about" className="py-24 px-4 w-full overflow-x-hidden bg-primary">
       <div className="max-w-5xl mx-auto">
         <AnimatedSection>
           <div className="text-center mb-16">
@@ -19,15 +19,15 @@ export default function About() {
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <AnimatedSection delay={0.2}>
             <div className="space-y-5 text-center md:text-left">
-              <p className="text-gray-100 leading-relaxed text-xl">
+              <p className="text-textPrimary leading-relaxed text-xl">
                 Mi especialidad es construir la "capa invisible" que hace que las aplicaciones funcionen. 
                 APIs robustas, autenticación segura, bases de datos bien diseñadas y lógica de negocio confiable.
               </p>
-              <p className="text-gray-200 leading-relaxed text-lg">
+              <p className="text-textSecondary leading-relaxed text-lg">
                 He trabajado en proyectos complejos: e-commerce con pagos, sistemas en tiempo real, aplicaciones sin conexión. 
                 Cada proyecto me enseñó sobre escalabilidad, seguridad y experiencia del usuario.
               </p>
-              <p className="text-gray-200 leading-relaxed text-lg">
+              <p className="text-textSecondary leading-relaxed text-lg">
                 No genero código solo por generar. Cada función, middleware y relación de base de datos tiene propósito. 
                 Creo en arquitectura limpia y en que el código backend bien hecho es invisible para el usuario, pero crucial para el negocio.
               </p>
@@ -36,28 +36,28 @@ export default function About() {
           
           <AnimatedSection delay={0.4}>
             <div className="space-y-6">
-              <div className="bg-gradient-to-br from-accent/5 to-accent/10 p-7 rounded-lg border border-gray-700/50 hover:border-gray-600 transition-all duration-300 hover:shadow-lg hover:shadow-accent/10">
+              <div className="bg-gradient-to-br from-secondary/40 to-secondary/20 p-7 rounded-lg border border-secondary/50 hover:border-secondary/70 transition-all duration-300 hover:shadow-lg hover:shadow-accent/5">
                 <h3 className="text-accent font-mono text-sm uppercase tracking-widest mb-4 flex items-center gap-2 justify-center md:justify-start">
                   <span className="w-1 h-1 bg-accent rounded-full"></span> Stack principal
                 </h3>
                 <div className="space-y-2">
-                  <p className="text-gray-300 text-sm flex justify-center md:justify-start"><span className="text-accent mr-2">›</span> Node.js</p>
-                  <p className="text-gray-300 text-sm flex justify-center md:justify-start"><span className="text-accent mr-2">›</span> Express</p>
-                  <p className="text-gray-300 text-sm flex justify-center md:justify-start"><span className="text-accent mr-2">›</span> PostgreSQL</p>
-                  <p className="text-gray-300 text-sm flex justify-center md:justify-start"><span className="text-accent mr-2">›</span> Prisma ORM</p>
-                  <p className="text-gray-300 text-sm flex justify-center md:justify-start"><span className="text-accent mr-2">›</span> JWT Auth</p>
+                  <p className="text-textSecondary text-sm flex justify-center md:justify-start"><span className="text-accent mr-2">›</span> Node.js</p>
+                  <p className="text-textSecondary text-sm flex justify-center md:justify-start"><span className="text-accent mr-2">›</span> Express</p>
+                  <p className="text-textSecondary text-sm flex justify-center md:justify-start"><span className="text-accent mr-2">›</span> PostgreSQL</p>
+                  <p className="text-textSecondary text-sm flex justify-center md:justify-start"><span className="text-accent mr-2">›</span> Prisma ORM</p>
+                  <p className="text-textSecondary text-sm flex justify-center md:justify-start"><span className="text-accent mr-2">›</span> JWT Auth</p>
                 </div>
               </div>
 
-              <div className="bg-gradient-to-br from-accent/5 to-accent/10 p-7 rounded-lg border border-gray-700/50 hover:border-gray-600 transition-all duration-300 hover:shadow-lg hover:shadow-accent/10">
+              <div className="bg-gradient-to-br from-secondary/40 to-secondary/20 p-7 rounded-lg border border-secondary/50 hover:border-secondary/70 transition-all duration-300 hover:shadow-lg hover:shadow-accent/5">
                 <h3 className="text-accent font-mono text-sm uppercase tracking-widest mb-4 flex items-center gap-2 justify-center md:justify-start">
                   <span className="w-1 h-1 bg-accent rounded-full"></span> Enfoque
                 </h3>
                 <ul className="space-y-2">
-                  <li className="text-gray-300 text-sm flex justify-center md:justify-start"><span className="text-accent mr-2">✓</span> Arquitectura escalable</li>
-                  <li className="text-gray-300 text-sm flex justify-center md:justify-start"><span className="text-accent mr-2">✓</span> Seguridad first</li>
-                  <li className="text-gray-300 text-sm flex justify-center md:justify-start"><span className="text-accent mr-2">✓</span> Código mantenible</li>
-                  <li className="text-gray-300 text-sm flex justify-center md:justify-start"><span className="text-accent mr-2">✓</span> Debugging metódico</li>
+                  <li className="text-textSecondary text-sm flex justify-center md:justify-start"><span className="text-accent mr-2">✓</span> Arquitectura escalable</li>
+                  <li className="text-textSecondary text-sm flex justify-center md:justify-start"><span className="text-accent mr-2">✓</span> Seguridad first</li>
+                  <li className="text-textSecondary text-sm flex justify-center md:justify-start"><span className="text-accent mr-2">✓</span> Código mantenible</li>
+                  <li className="text-textSecondary text-sm flex justify-center md:justify-start"><span className="text-accent mr-2">✓</span> Debugging metódico</li>
                 </ul>
               </div>
             </div>
