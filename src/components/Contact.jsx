@@ -37,7 +37,7 @@ export default function Contact() {
             </h2>
             <p className="text-textSecondary text-xl leading-relaxed max-w-2xl mx-auto">
               Estoy abierto a oportunidades, colaboraciones y conversaciones sobre arquitectura backend, 
-              problemas técnicos interesantes o cualquier cosa relacionada con desarrollo serio.
+              problemas técnicos interesantes o cualquier cosa relacionada con <span className="text-accent">desarrollo serio</span>
             </p>
           </div>
         </AnimatedSection>

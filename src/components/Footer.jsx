@@ -13,7 +13,7 @@ export default function Footer() {
         >
           <div className="flex items-center justify-center gap-1 text-accent text-sm font-mono">
             <span className="w-1.5 h-1.5 bg-accent rounded-full inline-block"></span>
-            <span>angel.dev</span>
+            <span>angello.dev</span>
             <span className="w-1.5 h-1.5 bg-accent rounded-full inline-block"></span>
           </div>
           <p className="text-textSecondary text-sm">

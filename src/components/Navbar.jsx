@@ -26,7 +26,7 @@ export default function Navbar() {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5 }}
         >
-          <span className="text-textPrimary">angel</span>
+          <span className="text-textPrimary">angello</span>
           <span className="text-accent">.dev</span>
         </motion.div>
         

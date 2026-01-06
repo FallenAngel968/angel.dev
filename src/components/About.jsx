@@ -10,8 +10,11 @@ export default function About() {
             <p className="text-accent text-sm font-mono tracking-widest uppercase mb-4 inline-block bg-accent/10 px-4 py-2 rounded-full">
               // Quién soy
             </p>
+            <h1 className="text-4xl md:text-5xl font-black bg-gradient-to-r from-yellow-400 via-accent to-orange-400 bg-clip-text text-transparent mb-12 text-center">
+              Angel Valentin Flores Eduardo <br />
+            </h1>
             <h2 className="text-5xl md:text-6xl font-black bg-gradient-to-r from-blue-400 via-accent to-purple-400 bg-clip-text text-transparent mt-6">
-              Backend developer con <br /> responsabilidad técnica
+             Backend developer con <br /> responsabilidad técnica
             </h2>
           </div>
         </AnimatedSection>
